@@ -1,0 +1,14 @@
+# Primary reviewer for all CI/CD related changes
+* @devops-labs-org/devopslab-admin
+
+# Ownership for build and deployment workflows
+/.github/workflows/ @devops-labs-org/srikanthchowdry
+
+# Ownership for release processes and pipeline logic
+/pipeline/ @devops-labs-org/devopslab-admin @devops-labs-org/srikanthchowdry
+
+# Ownership for CI/CD utility and support scripts
+/tools/ @devops-labs-org/srikanthchowdry
+
+# Ownership for CI/CD related documentation
+/docs/ @devops-labs-org/devopslab-admin
