@@ -1,68 +1,82 @@
 # CI/CD Repository
 
+This repository contains CI/CD (Continuous Integration and Continuous Deployment) configuration files.
+It defines how code is built, tested, scanned, and deployed across environments using automated workflows.
+
 ---
 
 ## What this repository is for
 
-This repository is used to manage **CI/CD (Continuous Integration and Continuous Deployment) configurations**.
-The purpose of this repository is to keep deployment logic
+This repo manages delivery logic: building code, running automated tests, scanning for security issues, and deploying applications to development, staging, and production in a repeatable way.
+
+---
+
+## CI vs CD 
+
+**Continuous Integration (CI)** automatically builds and tests code when changes are pushed,
+helping detect issues early before they reach production.
+
+**Continuous Deployment (CD)** promotes code that passed CI checks to environments automatically,
+enabling faster and more reliable releases without manual deployment steps.
+
+---
+
+## Pipeline stages 
+
+A typical pipeline runs through these ordered stages:
+
+1. Source checkout  
+2. Build and package  
+3. Unit and integration tests  
+4. Security scanning  
+5. Publish artifacts  
+6. Deploy to environments
+
+Each stage must succeed before continuing to the next to maintain release safety.
+
+---
+
+## Promotion across environments 
+
+Deployments progress through environments in sequence:
+development → staging → production  
+Only validated changes move forward, reducing the risk of production failures.
+
+---
+
+## Security checks 
+
+Pipelines run automated scans to detect security vulnerabilities in dependencies,
+container images, and configurations.  
+Deployments are blocked if high-risk issues are found to prevent insecure releases.
 
 ---
 
 ## What type of changes are allowed
 
-- Pipeline configuration files
-- Build, test, and deployment workflow definitions
-- Environment-specific CI/CD settings
-- Documentation explaining pipeline behavior
-- Small, focused changes that affect one pipeline logic
-  
+- CI/CD workflow configuration files
+- Automation logic for build, test, and deploy
+- Documentation describing pipeline behavior
+- Small changes improving delivery reliability
+
 ---
 
 ## What changes are NOT allowed
 
 - Application source code
 - Infrastructure provisioning files
-- Secrets, tokens, passwords, or credentials
-- One-time manual fixes or temporary scripts
-- Experimental changes without documentation
-
----
-
-## What happens when things fail
-
-If the release process fails, working code won’t reach users because it can’t be delivered.  
-When the problem lasts too long, teams can’t ship new features, work gets stuck, and it becomes unclear which version is live in production.
-
----
-
-## How rollback or recovery works
-
-When the delivery process breaks, we bring back the last working pipeline setup instead of fixing each step one by one.  
-This quickly restores a stable release flow, even if it means removing recent pipeline changes that caused problems.  
-
----
-
-## Who is impacted by failure
-
-When the delivery process fails, product teams can’t release new features or fixes, which slows down progress for users.  
-Platform and release engineers may have to stop deployments and focus on fixing the delivery issues before anything can be shipped.  
-Keeping everyone informed during these failures helps teams understand the delay and what steps are being taken to restore normal releases.
+- Secrets, passwords, tokens, or certificates
+- Temporary or undocumented manual scripts
 
 ---
 
 ## Who owns this repository
 
-This repository is owned by the DevOps team, who are responsible for reviewing changes and keeping the delivery process reliable.  
-They make sure contributors follow practices that keep releases stable and easy to understand.  
-Only authorized maintainers can approve and merge changes to the main branch to protect release stability.
+The DevOps team maintains this repository and reviews changes. Only authorized maintainers may approve merges into main to protect release quality.
 
 ---
 
 ## Risk if misused
 
-If unsafe shortcuts or incorrect pipeline rules are added here, broken or untested code can reach production and cause outages.  
-These failures can be hard to trace and may force emergency rollbacks, slowing recovery and disrupting teams at critical times.  
-Careful reviews and consistent delivery rules help prevent hidden deployment risks and keep releases stable.
-
----
+If unsafe changes modify pipeline logic, untested or insecure code could deploy to production,
+causing outages that require emergency rollback and delay user-facing releases.
